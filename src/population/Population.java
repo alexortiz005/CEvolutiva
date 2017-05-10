@@ -70,6 +70,14 @@ public abstract class Population {
 		this.setAvgFitness(sum);
 	}
         
+        public double getMedianFitness(){
+            if(individuals.length%2==0){
+                return get((size()/2)-1).getFitness()+get(size()/2).getFitness();          
+            }else{
+                return get(size()/2).getFitness();                
+            }
+        }
+        
         public double bestFitness(){
             return get(0).fitness;           
         }

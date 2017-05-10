@@ -5,8 +5,12 @@
  */
 package DiffEvolution;
 
+import data.Processor;
 import function.*;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import population.Individual;
 
 /**
@@ -18,48 +22,72 @@ public class DiffEvolutionTest implements Runnable{
     @Override
     public void run() {
         
-        //Function f = new Griewank(600, 50); 
-        //Function f= new Rastrigin(1000, 10);
-        //Function f= new MultiDimRosenbrock(10,3);
-        //Function f= new Rosenbrock(1000,5,100);
-        //Function f= new CrossInTray(100);
-        //Function f= new Eggholder(100);
-        //Function f= new Schwefel(500,2);
-        Function f= new Styblinski(500,10);
-        //Function f= new Beale(4.5);
+        int iterations=100000;
+        int experiments=30;
+        int step=iterations/1000;
+        int steps=iterations/step;  
         
-        double vector[]= f.ranDoubleVector();  
+        double bests[][]= new double[steps][experiments];
+        double avgs[][]= new double[steps][experiments];
+        double worsts[][]= new double[steps][experiments];
+        double results[][]= new double[experiments][];
         
-        Individual initPop[]= DEIndividual.makeRandomIndividuals(50, f);  
         
-        DEPopulation pop= new DEPopulation(initPop, f,0.5,0.5);
-        
+        for (int j = 0;j < experiments; j++) {
+            int k=0;
+            
+            //Function f = new Griewank(600, 50); 
+            //Function f= new Rastrigin(1000, 10);
+            //Function f= new MultiDimRosenbrock(10,3);
+            //Function f= new Rosenbrock(1000,5,100);
+            //Function f= new CrossInTray(100);
+            //Function f= new Eggholder(100);
+            //Function f= new Schwefel(500,2);
+            Function f= new Styblinski(500,3);
+            //Function f= new Beale(4.5);
 
-        
-        double total=1;
-        
-        for(int i=0;i<100000;i++) {             
+            double vector[]= f.ranDoubleVector();  
+
+            Individual initPop[]= DEIndividual.makeRandomIndividuals(50, f);  
+
+            DEPopulation pop= new DEPopulation(initPop, f,0.5,0.5);
             
-            pop.sortPopulation();
-            pop.calcAvgFitness();
             
-            double best=pop.bestFitness();
-            double avg=pop.getAvgFitness();
-            double worst=pop.worstFitness(); 
+            for(int i=0;i<iterations;i++) {             
             
-            System.out.printf("%d\t%.15f\t%.15f\t%.15f\n", i,best,avg,worst);
-            
-            i++;   
-            pop.evolve();
-            
-            total=best+avg+worst;
+                pop.sortPopulation();
+                pop.calcAvgFitness();
+
+                double best=pop.bestFitness();
+                double avg=pop.getMedianFitness();
+                double worst=pop.worstFitness(); 
+
+                if(i%step==0){
+                    bests[k][j]=best;
+                    avgs[k][j]=best;
+                    worsts[k][j]=best;
+                    k++;
+                }   
+ 
+                pop.evolve();  
+
+            }            
+            DEIndividual bestIndividual= (DEIndividual)pop.best();
+            results[j]=bestIndividual.getX();
             
         }
         
+        Processor processor= new Processor(bests, avgs, worsts, results);
         
-        System.out.println(pop.best());
+        processor.setFileName("DiffEvolution.csv");
+        processor.setStep(step);
+        processor.process();
         
-        
+        try {
+            processor.toFile();
+        } catch (IOException ex) {
+            Logger.getLogger(DiffEvolutionTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
     }
     
