@@ -137,12 +137,8 @@ public abstract class Population {
             this.individuals=result;
         }
         
-        public abstract void evolve();
-        
-        public void evolveAndSort(){
-            this.evolve();
-            this.sortPopulation();
-        }
+        public abstract void evolve();        
+
 	
 	
 

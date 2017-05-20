@@ -8,12 +8,13 @@ package DiffEvolution;
 import function.Function;
 import java.util.Arrays;
 import population.Individual;
+import population.RealIndividual;
 
 /**
  *
  * @author root
  */
-public class DEIndividual extends Individual{
+public class DEIndividual extends RealIndividual{
     
     public static Individual[] makeRandomIndividuals(int n, Function function){
         
@@ -28,37 +29,10 @@ public class DEIndividual extends Individual{
         return output;
         
     }
-    
-    private double x[];
-    
-    public DEIndividual(double x[]){
-        this.x=x;
-    }  
 
-    public double[] getX() {
-        return x;
-    }
-
-    public void setX(double[] x) {
-        this.x = x;
-    } 
-    
-    public double getX(int i) {
-        return x[i];
-    }
-
-    public void setX(int i,double a) {
-        this.x[i] = a;
-    }    
-    
-    public void calcularFitness(Function f){
-        this.fitness=f.calculate(x);
-    }
-
-    @Override
-    public Individual clone() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public DEIndividual(double[] x) {
+        super(x);
+    }   
 
     @Override
     public Individual mutate() {
@@ -75,12 +49,13 @@ public class DEIndividual extends Individual{
         double y[]= new double[x.length];
         
         int R=random.nextInt(x.length);
+        
         /*
         DEPopulation pop= (DEPopulation)this.getPopulation();
         
         double F= pop.getDifferencialWeight();
         
-        El codigo de abajo hace lo mismo
+        La linea de abajo hace lo mismo
         */
         
         double F= this.population.getMutationProbability();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DiffEvolution;
+package particleSwarm;
 
 import function.*;
 import population.Individual;
@@ -13,27 +13,36 @@ import test.Test;
  *
  * @author root
  */
-public class DiffEvolutionTest extends Test{    
+public class PSwarmTest extends Test{
 
-    public DiffEvolutionTest(int iterations, int experiments, String outputFileName) {
+    public PSwarmTest(int iterations, int experiments, String outputFileName) {
         super(iterations, experiments, outputFileName);
     }
 
     @Override
     public void experiment(int j) {
         
-        //Function f = new Griewank(600, 50); 
+        Function f = new Griewank(600, 50); 
         //Function f= new Rastrigin(1000, 10);
-        Function f= new MultiDimRosenbrock(10,3);
+        //Function f= new MultiDimRosenbrock(10,3);
         //Function f= new Rosenbrock(1000,5,100);
         //Function f= new CrossInTray(100);
         //Function f= new Styblinski(500,3);
-        //Function f= new Beale(4.5);  
+        //Function f= new Beale(4.5);
 
-        Individual initPop[]= DEIndividual.makeRandomIndividuals(50, f);  
+        Individual initPop[]= Particle.makeRandomParticles(50, f);  
 
-        DEPopulation pop= new DEPopulation(initPop, f,0.5,0.5);
-
+        Swarm pop= new Swarm(initPop, f,0.5,0.5,0.5);
+        
+        //System.out.println(pop.best());
+        System.out.printf("bestFitness:\t %f\n", pop.bestFitness());
+        //System.out.println("");
+        
+        //System.out.println(pop.worst());
+        System.out.printf("worstFitness:\t %f\n", pop.worstFitness());
+        System.out.printf("global:\t %f\n", pop.getGlobalFitness());
+        System.out.println("");
+        /*
         for(int i=0;i<iterations;i++) {             
 
             pop.sortPopulation();
@@ -53,10 +62,12 @@ public class DiffEvolutionTest extends Test{
             pop.evolve();  
 
         }            
-        DEIndividual bestIndividual= (DEIndividual)pop.best();
+        Particle bestIndividual= (Particle)pop.best();
         results[j]=bestIndividual.getX();
+        */
         
     }
-    
+
+   
     
 }

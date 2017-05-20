@@ -37,10 +37,7 @@ public abstract class Individual implements Cloneable,Comparable<Individual> {
 
             return 0;
 
-    }
-
-    @Override
-    public abstract Individual clone();       
+    }    
     
     public abstract Individual mutate();
     

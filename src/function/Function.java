@@ -17,11 +17,17 @@ public abstract class Function{
 
 	public abstract double calculate(double[] x);
 
-	protected double getLimit(){
+	public double getLimit(){
 
 		return this.limit;
 
 	}
+
+        public int getDimension() {
+            return dimension;
+        }
+        
+        
 	
 	public abstract HashMap<int[], Integer> ejemplos(int n);
 	

@@ -9,25 +9,25 @@ import function.Function;
 import java.util.Arrays;
 import population.Individual;
 import population.Population;
+import population.RealPopulation;
 
 /**
  *
  * @author root
  */
-public class DEPopulation extends Population{
+public class DEPopulation extends RealPopulation{
     
-    private double F;
-    private Function function; 
+    private double F;  
 
     public DEPopulation(Individual[] individuals,Function function, double crossProb, double mutProb) {        
         
-        super(individuals, crossProb, mutProb);
+        super(individuals,function, crossProb, mutProb);
         
         if(individuals.length<4)        
             throw new IllegalArgumentException("Debe haber al menos 4 individuos en la poblacion inicial");
         
         this.F=mutProb;
-        this.function=function;
+
     }
     
     public double getDifferencialWeight(){
@@ -39,13 +39,6 @@ public class DEPopulation extends Population{
         
     }
 
-    public Function getFunction() {
-        return function;
-    }
-
-    public void setFunction(Function function) {
-        this.function = function;
-    }    
 
     @Override
     public void evolve() {
