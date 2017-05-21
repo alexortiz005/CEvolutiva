@@ -22,8 +22,8 @@ public class PSwarmTest extends Test{
     @Override
     public void experiment(int j) {
         
-        Function f = new Griewank(600, 50); 
-        //Function f= new Rastrigin(1000, 10);
+        //Function f = new Griewank(600, 50); 
+        Function f= new Rastrigin(1000, 10);
         //Function f= new MultiDimRosenbrock(10,3);
         //Function f= new Rosenbrock(1000,5,100);
         //Function f= new CrossInTray(100);
@@ -34,36 +34,41 @@ public class PSwarmTest extends Test{
 
         Swarm pop= new Swarm(initPop, f,0.5,0.5,0.5);
         
-        //System.out.println(pop.best());
-        System.out.printf("bestFitness:\t %f\n", pop.bestFitness());
-        //System.out.println("");
-        
-        //System.out.println(pop.worst());
-        System.out.printf("worstFitness:\t %f\n", pop.worstFitness());
         System.out.printf("global:\t %f\n", pop.getGlobalFitness());
         System.out.println("");
-        /*
-        for(int i=0;i<iterations;i++) {             
-
+        
+        for(int i=0;i<iterations;i++) {     
+            
+            pop.evolve();    
             pop.sortPopulation();
             pop.calcAvgFitness();
 
             double best=pop.bestFitness();
             double avg=pop.getMedianFitness();
-            double worst=pop.worstFitness(); 
+            double worst=pop.worstFitness();            
 
-            if(i%step==0){
+            
+             if(i%step==0){
                 bests[k][j]=best;
                 avgs[k][j]=best;
                 worsts[k][j]=best;
                 k++;
             }   
+             
+            Particle bestIndividual= (Particle)pop.getGlobal();
+            results[j]=bestIndividual.getX();
+            
+        }       
+        /*
+
+            
+
+           
 
             pop.evolve();  
 
-        }            
-        Particle bestIndividual= (Particle)pop.best();
-        results[j]=bestIndividual.getX();
+                 
+        
         */
         
     }

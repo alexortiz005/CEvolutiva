@@ -66,7 +66,14 @@ public class Particle extends RealIndividual {
     public void setP(double[] p) {
         this.p = p;
     }
-
+    
+    public Swarm getSwarm(){
+        return (Swarm)this.population;
+    }
+    
+    public Particle getGlobal(){
+        return this.getSwarm().getGlobal();
+    }
 
     @Override
     public Individual mutate() {
