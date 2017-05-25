@@ -25,18 +25,15 @@ public class PSwarmTest extends Test{
         //Function f = new Griewank(600, 50); 
         //Function f= new Rastrigin(1000, 10);
         //Function f= new MultiDimRosenbrock(10,3);
-        //Function f= new Rosenbrock(1000,5,100);
-        Function f= new Paraboloid(100);
+        Function f= new Rosenbrock(100,5,100);
+        //Function f= new Paraboloid(100);
         //Function f= new CrossInTray(100);
         //Function f= new Styblinski(500,3);
         //Function f= new Beale(4.5);
 
-        Individual initPop[]= Particle.makeRandomParticles(100, f);  
+        Individual initPop[]= Particle.makeRandomParticles(150, f);  
 
-        Swarm pop= new Swarm(initPop, f,0.3,0.3,0.3);
-        
-        System.out.printf("global:\t %f\n", pop.getGlobalFitness());
-        System.out.println("");
+        Swarm pop= new Swarm(initPop, f,0.729,2.05,2.05);
         
         for(int i=0;i<iterations;i++) {     
             
@@ -45,25 +42,20 @@ public class PSwarmTest extends Test{
             pop.calcAvgFitness();
 
             double best=pop.getGlobalFitness();
-            double avg=pop.getAvgFitness();
-            double worst=pop.worstFitness();            
+            double avg=pop.getAvgFitness();        
 
             
              if(i%step==0){
-                //System.out.println(pop.getGlobal());
-                //System.out.println(pop.getGlobalFitness());
                 bests[k][j]=best;
                 avgs[k][j]=avg;
-                worsts[k][j]=worst;
+                worsts[k][j]=0;
+                System.out.println(k);
                 k++;
             }                
 
             results[j]=pop.getGlobal();
             
-        }     
-        
-        System.exit(-1);
-
+        }    
         
     }
 

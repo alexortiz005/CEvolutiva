@@ -76,10 +76,24 @@ public class Particle extends RealIndividual {
         }        
     }
     
-    public void move(){
+    public void move(){    
         
-        for (int i = 0; i < v.length; i++) 
-            x[i]+=v[i];            
+        double[] aux_global=this.getSwarm().getGlobal();       
+        double[] init=new double[aux_global.length];
+        
+        System.arraycopy( aux_global, 0, init, 0, aux_global.length );
+        //System.out.println("firstinit:"+Arrays.toString(init));
+        for (int i = 0; i < v.length; i++) {            
+            x[i]+=v[i]; 
+            //double[] global=this.getSwarm().getGlobal();
+            //System.out.println("global:"+Arrays.toString(global)+"V_i:"+v[i]);
+        }
+        
+        this.getSwarm().setGlobal(init);
+        
+        //System.out.println("lastinit:"+Arrays.toString(init));
+        
+         
         
     }
 

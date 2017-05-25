@@ -103,45 +103,34 @@ public class Swarm extends RealPopulation{
             particle.setSpeed(v);  
             
             double aux=this.getGlobalFitness();
-            //System.out.println("globalfitness: "+aux);
-            System.out.println("global:"+Arrays.toString(global)); 
             
-            particle.move();  
+            particle.move(); 
             
-            double aux2=this.getGlobalFitness();
-            //System.out.println("globalfitness: "+aux2);
-            System.out.println("global:"+Arrays.toString(global)); 
+            double aux2=this.getGlobalFitness();            
+
             
             double diff=aux2-aux;
             
             if(diff!=0){
                 System.out.println("diff:"+diff);     
                 System.exit(-1);
-            }
-            
-            
-            
+            }            
 
             
             if(function.calculate(particle.getX())<function.calculate(particle.getP()))
                 particle.setP(particle.getX());  
             
-            System.out.println(Arrays.toString(global));            
-            System.out.print(i+"\t");
-            System.out.println(this.getGlobalFitness()+"\t");   
-            
-            delay(50);
+            //System.out.println(Arrays.toString(global));            
+            //System.out.print(i+"\t");
+            //System.out.println(this.getGlobalFitness()+"\t");   
+
             
             double fp_i=function.calculate(particle.getP());
             
             double fg=function.calculate(global); 
             
             if(fp_i<fg){                
-                    this.setGlobal(particle.getP());
-                    System.out.print(i+"\t");
-                    System.out.printf("%f -- %f:%f ",fp_i,fg,this.getGlobalFitness());
-                    System.out.println("mejoro");       
-                    delay(5000);
+                    this.setGlobal(particle.getP());      
             }  
 
             
