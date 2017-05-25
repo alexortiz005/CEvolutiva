@@ -19,7 +19,7 @@ public abstract class Individual implements Cloneable,Comparable<Individual> {
         
 
     public double getFitness() {
-            return fitness;
+        return fitness;
     }
 
     public void setFitness(double fitness) {

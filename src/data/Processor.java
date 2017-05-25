@@ -6,8 +6,11 @@
 package data;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 /**
@@ -84,32 +87,36 @@ public class Processor {
         this.step = step;
     }    
     
-    public void toFile() throws IOException{     
+    public void toFile() throws FileNotFoundException, UnsupportedEncodingException{     
         
-        file=new File(path+File.separator+fileName);
-       
-        FileWriter writer = new FileWriter(file);
+        file=new File(path+File.separator+fileName);       
 
-        CSVUtils.writeLine(writer, Arrays.asList("i",
+        
+        PrintWriter writer = new PrintWriter(file, "UTF-8");
+        
+        writer.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n","i",
                                                  "Best",
                                                  "Average",
                                                  "Worst",
                                                  "Best SD",
                                                  "Average SD",
-                                                 "Worst SD"));        
+                                                 "Worst SD");
+  
         
         for (int i = 0; i < bests.length; i++) {
-            CSVUtils.writeLine(writer, Arrays.asList(String.format("%d", (i+1)*step),
-                                                     String.format("%.15f", bests_avg[i]),
-                                                     String.format("%.15f", avgs_avg[i]),
-                                                     String.format("%.15f", worsts_avg[i]),
-                                                     String.format("%.15f", bests_sd[i]),
-                                                     String.format("%.15f", avgs_sd[i]),
-                                                     String.format("%.15f", worsts_sd[i])));  
+            writer.printf("%d\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t%.15f\t\n", (i+1)*step
+                                                                          , bests_avg[i]
+                                                                          , avgs_avg[i]
+                                                                          , worsts_avg[i]
+                                                                          , bests_sd[i]
+                                                                          , avgs_sd[i]
+                                                                          , worsts_sd[i]);
         }
-        CSVUtils.writeLine(writer, Arrays.asList("Results:"));
+        
+        writer.println("Results:");
+
         for (int i = 0; i < results.length; i++) {
-            CSVUtils.writeLine(writer, Arrays.asList(Arrays.toString(results[i])));  
+            writer.println(Arrays.toString(results[i]));
         }
 
         writer.flush();

@@ -23,16 +23,17 @@ public class PSwarmTest extends Test{
     public void experiment(int j) {
         
         //Function f = new Griewank(600, 50); 
-        Function f= new Rastrigin(1000, 10);
+        //Function f= new Rastrigin(1000, 10);
         //Function f= new MultiDimRosenbrock(10,3);
         //Function f= new Rosenbrock(1000,5,100);
+        Function f= new Paraboloid(100);
         //Function f= new CrossInTray(100);
         //Function f= new Styblinski(500,3);
         //Function f= new Beale(4.5);
 
-        Individual initPop[]= Particle.makeRandomParticles(50, f);  
+        Individual initPop[]= Particle.makeRandomParticles(100, f);  
 
-        Swarm pop= new Swarm(initPop, f,0.5,0.5,0.5);
+        Swarm pop= new Swarm(initPop, f,0.3,0.3,0.3);
         
         System.out.printf("global:\t %f\n", pop.getGlobalFitness());
         System.out.println("");
@@ -40,36 +41,29 @@ public class PSwarmTest extends Test{
         for(int i=0;i<iterations;i++) {     
             
             pop.evolve();    
-            pop.sortPopulation();
+            //pop.sortPopulation();
             pop.calcAvgFitness();
 
-            double best=pop.bestFitness();
-            double avg=pop.getMedianFitness();
+            double best=pop.getGlobalFitness();
+            double avg=pop.getAvgFitness();
             double worst=pop.worstFitness();            
 
             
              if(i%step==0){
+                //System.out.println(pop.getGlobal());
+                //System.out.println(pop.getGlobalFitness());
                 bests[k][j]=best;
-                avgs[k][j]=best;
-                worsts[k][j]=best;
+                avgs[k][j]=avg;
+                worsts[k][j]=worst;
                 k++;
-            }   
-             
-            Particle bestIndividual= (Particle)pop.getGlobal();
-            results[j]=bestIndividual.getX();
+            }                
+
+            results[j]=pop.getGlobal();
             
-        }       
-        /*
-
-            
-
-           
-
-            pop.evolve();  
-
-                 
+        }     
         
-        */
+        System.exit(-1);
+
         
     }
 

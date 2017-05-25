@@ -30,13 +30,30 @@ public class Particle extends RealIndividual {
         
         for (int i = 0; i < n; i++) {
             double x[]=function.ranDoubleVector();
-            Particle part=new Particle(x,x);
+            double p[]= new double[x.length];
+            System.arraycopy( x, 0, p, 0, x.length );
+            Particle part=new Particle(x,p);
             part.calcularFitness(function);
             part.setRandomSpeed(function);
             output[i]= part;            
         }
         
         return output;
+        
+    }
+    
+    public static Individual makeRandomParticle(Function function){
+        
+        
+        double x[]=function.ranDoubleVector();
+        double p[]= new double[x.length];
+        System.arraycopy( x, 0, p, 0, x.length );
+        Particle part=new Particle(x,p);
+        part.calcularFitness(function);
+        part.setRandomSpeed(function);
+        
+        return part;           
+       
         
     }
 
@@ -58,6 +75,13 @@ public class Particle extends RealIndividual {
             v[i]=random.nextDouble()*2*lim-lim;            
         }        
     }
+    
+    public void move(){
+        
+        for (int i = 0; i < v.length; i++) 
+            x[i]+=v[i];            
+        
+    }
 
     public double[] getP() {
         return p;
@@ -69,11 +93,8 @@ public class Particle extends RealIndividual {
     
     public Swarm getSwarm(){
         return (Swarm)this.population;
-    }
-    
-    public Particle getGlobal(){
-        return this.getSwarm().getGlobal();
-    }
+    }    
+
 
     @Override
     public Individual mutate() {
