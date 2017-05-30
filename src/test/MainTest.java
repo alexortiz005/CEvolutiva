@@ -7,6 +7,7 @@ package test;
 
 import trees.TreesTest;
 import DiffEvolution.DiffEvolutionTest;
+import HillClimbing.HillClimbingTest;
 import particleSwarm.PSwarmTest;
 
 /**
@@ -16,11 +17,13 @@ import particleSwarm.PSwarmTest;
 public class MainTest {
     public static void main(String[] args) {
         //TreesTest treeTest= new TreesTest(1000000,2);
-        //DiffEvolutionTest diffTest = new DiffEvolutionTest(100000,30,"DiffEvolution.csv");
-        PSwarmTest psTest = new PSwarmTest(10000,30,"ParticleSwarm.csv");
+        DiffEvolutionTest diffTest = new DiffEvolutionTest(1000000,30,"DiffEvolution.csv");
+        PSwarmTest psTest = new PSwarmTest(1000000,30,"ParticleSwarm.csv");
+        HillClimbingTest hcTest = new HillClimbingTest(1000000,30,"ParticleSwarm.csv");
         //treeTest.run();
         //diffTest.run();
-        psTest.run();
+        //psTest.run();
+        hcTest.run();
     }
     
 }

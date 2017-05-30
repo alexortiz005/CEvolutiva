@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DiffEvolution;
+package HillClimbing;
 
 import function.*;
+import java.util.Arrays;
 import population.Individual;
 import test.Test;
 
@@ -13,17 +14,17 @@ import test.Test;
  *
  * @author root
  */
-public class DiffEvolutionTest extends Test{    
+public class HillClimbingTest extends Test {
 
-    public DiffEvolutionTest(int iterations, int experiments, String outputFileName) {
+    public HillClimbingTest(int iterations, int experiments, String outputFileName) {
         super(iterations, experiments, outputFileName);
     }
 
     @Override
     public void experiment(int j) {
         
-        //Function f = new Griewank(600, 50); 
-        Function f= new Rastrigin(1000, 10);
+        Function f = new Griewank(600, 10); 
+        //Function f= new Rastrigin(1000, 10);
         //Function f= new MultiDimRosenbrock(10,3);
         //Function f= new Paraboloid(5,100);
         //Function f= new Rosenbrock(1000,5,100);
@@ -31,9 +32,9 @@ public class DiffEvolutionTest extends Test{
         //Function f= new Styblinski(500,3);
         //Function f= new Beale(4.5);  
 
-        Individual initPop[]= DEIndividual.makeRandomIndividuals(50, f);  
+        Individual initPop[]= HCIndividual.makeRandomIndividuals(100, f);  
 
-        DEPopulation pop= new DEPopulation(initPop, f,0.5,0.5);
+        HCPopulation pop= new HCPopulation(initPop, f,0.5,0.5);
 
         for(int i=0;i<iterations;i++) {             
 
@@ -54,12 +55,12 @@ public class DiffEvolutionTest extends Test{
             pop.evolve();  
 
         }            
-        DEIndividual bestIndividual= (DEIndividual)pop.best();
+        
+        HCIndividual bestIndividual= (HCIndividual)pop.best();
         results[j]=bestIndividual.getX();
         
-        System.out.println("Differential Evolution EXPERIMENT "+j+" FINISHED");
-        
+        System.out.println("Hill Climbing EXPERIMENT "+j+" FINISHED");
+       
     }
-    
     
 }

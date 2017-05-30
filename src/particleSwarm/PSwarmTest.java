@@ -23,10 +23,10 @@ public class PSwarmTest extends Test{
     public void experiment(int j) {
         
         //Function f = new Griewank(600, 50); 
-        //Function f= new Rastrigin(1000, 10);
+        Function f= new Rastrigin(1000, 10);
         //Function f= new MultiDimRosenbrock(10,3);
-        Function f= new Rosenbrock(100,5,100);
-        //Function f= new Paraboloid(100);
+        //Function f= new Rosenbrock(100,5,100);
+        //Function f= new Paraboloid(5,100);
         //Function f= new CrossInTray(100);
         //Function f= new Styblinski(500,3);
         //Function f= new Beale(4.5);
@@ -48,14 +48,15 @@ public class PSwarmTest extends Test{
              if(i%step==0){
                 bests[k][j]=best;
                 avgs[k][j]=avg;
-                worsts[k][j]=0;
-                System.out.println(k);
+                worsts[k][j]=0;                
                 k++;
-            }                
-
-            results[j]=pop.getGlobal();
+            }              
             
-        }    
+        }   
+        
+        results[j]=pop.getGlobal();
+        
+        System.out.println("Particle Swarm EXPERIMENT "+j+" FINISHED");
         
     }
 

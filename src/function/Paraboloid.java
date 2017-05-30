@@ -13,13 +13,19 @@ import java.util.HashMap;
  */
 public class Paraboloid extends Function{
 
-    public Paraboloid(double limit) {
-        super(limit, 2);
+    public Paraboloid(int dim, double limit) {
+        super(dim, 2);
     }
 
     @Override
     public double calculate(double[] x) {
-        return x[0]*x[0]+x[1]*x[1];
+        double sum=0;
+        
+        for (int i = 0; i < x.length; i++) {
+            sum+=x[i]*x[i];            
+        }
+        
+        return sum;
     }
 
     @Override
