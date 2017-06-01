@@ -22,8 +22,8 @@ public class DiffEvolutionTest extends Test{
     @Override
     public void experiment(int j) {
         
-        //Function f = new Griewank(600, 50); 
-        Function f= new Rastrigin(1000, 10);
+        Function f = new Griewank(600, 20); 
+        //Function f= new Rastrigin(1000, 10);
         //Function f= new MultiDimRosenbrock(10,3);
         //Function f= new Paraboloid(5,100);
         //Function f= new Rosenbrock(1000,5,100);
@@ -35,19 +35,16 @@ public class DiffEvolutionTest extends Test{
 
         DEPopulation pop= new DEPopulation(initPop, f,0.5,0.5);
 
-        for(int i=0;i<iterations;i++) {             
-
-            pop.sortPopulation();
-            pop.calcAvgFitness();
-
-            double best=pop.bestFitness();
-            double avg=pop.getMedianFitness();
-            double worst=pop.worstFitness(); 
+        for(int i=0;i<iterations;i++) {         
 
             if(i%step==0){
-                bests[k][j]=best;
-                avgs[k][j]=best;
-                worsts[k][j]=best;
+                
+                pop.sortPopulation();
+                pop.calcAvgFitness();
+                
+                bests[k][j]=pop.bestFitness();
+                avgs[k][j]=pop.getMedianFitness();
+                worsts[k][j]=pop.worstFitness();
                 k++;
             }   
 

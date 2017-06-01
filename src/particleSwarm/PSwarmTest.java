@@ -22,8 +22,8 @@ public class PSwarmTest extends Test{
     @Override
     public void experiment(int j) {
         
-        //Function f = new Griewank(600, 50); 
-        Function f= new Rastrigin(1000, 10);
+        Function f = new Griewank(600, 20); 
+        //Function f= new Rastrigin(1000, 10);
         //Function f= new MultiDimRosenbrock(10,3);
         //Function f= new Rosenbrock(100,5,100);
         //Function f= new Paraboloid(5,100);
@@ -31,9 +31,9 @@ public class PSwarmTest extends Test{
         //Function f= new Styblinski(500,3);
         //Function f= new Beale(4.5);
 
-        Individual initPop[]= Particle.makeRandomParticles(150, f);  
+        Individual initPop[]= Particle.makeRandomParticles(100, f);  
 
-        Swarm pop= new Swarm(initPop, f,0.729,2.05,2.05);
+        Swarm pop= new Swarm(initPop, f,0.729,2.025,2.025);
         
         for(int i=0;i<iterations;i++) {     
             
