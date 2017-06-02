@@ -72,7 +72,7 @@ public abstract class Population {
         
         public double getMedianFitness(){
             if(individuals.length%2==0){
-                return get((size()/2)-1).getFitness()+get(size()/2).getFitness();          
+                return (get((size()/2)-1).getFitness()+get(size()/2).getFitness())/2;          
             }else{
                 return get(size()/2).getFitness();                
             }

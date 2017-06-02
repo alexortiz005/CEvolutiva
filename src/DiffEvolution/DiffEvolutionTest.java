@@ -22,13 +22,13 @@ public class DiffEvolutionTest extends Test{
     @Override
     public void experiment(int j) {
         
-        Function f = new Griewank(600, 20); 
+        //Function f = new Griewank(600, 20); 
         //Function f= new Rastrigin(1000, 10);
         //Function f= new MultiDimRosenbrock(10,3);
         //Function f= new Paraboloid(5,100);
         //Function f= new Rosenbrock(1000,5,100);
         //Function f= new CrossInTray(100);
-        //Function f= new Styblinski(500,3);
+        Function f= new Styblinski(500,10);
         //Function f= new Beale(4.5);  
 
         Individual initPop[]= DEIndividual.makeRandomIndividuals(50, f);  

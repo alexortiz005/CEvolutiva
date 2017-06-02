@@ -17,9 +17,9 @@ import particleSwarm.PSwarmTest;
 public class MainTest {
     public static void main(String[] args) {
         //TreesTest treeTest= new TreesTest(1000000,2);
-        DiffEvolutionTest diffTest = new DiffEvolutionTest(100000,30,"DiffEvolution.csv");
-        PSwarmTest psTest = new PSwarmTest(100000,30,"ParticleSwarm.csv");
-        HillClimbingTest hcTest = new HillClimbingTest(100000,30,"HillClimbing.csv");
+        DiffEvolutionTest diffTest = new DiffEvolutionTest(100000,30,"DiffEvolutionStyblinski.csv");
+        PSwarmTest psTest = new PSwarmTest(100000,30,"ParticleSwarmStyblinski.csv");
+        HillClimbingTest hcTest = new HillClimbingTest(100000,30,"HillClimbingStyblinski.csv");
         //treeTest.run();
         psTest.run();
         //diffTest.run();

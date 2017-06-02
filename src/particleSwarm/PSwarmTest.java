@@ -22,13 +22,13 @@ public class PSwarmTest extends Test{
     @Override
     public void experiment(int j) {
         
-        Function f = new Griewank(600, 20); 
+        //Function f = new Griewank(600, 20); 
         //Function f= new Rastrigin(1000, 10);
         //Function f= new MultiDimRosenbrock(10,3);
         //Function f= new Rosenbrock(100,5,100);
         //Function f= new Paraboloid(5,100);
         //Function f= new CrossInTray(100);
-        //Function f= new Styblinski(500,3);
+        Function f= new Styblinski(5,10);
         //Function f= new Beale(4.5);
 
         Individual initPop[]= Particle.makeRandomParticles(100, f);  
@@ -38,16 +38,12 @@ public class PSwarmTest extends Test{
         for(int i=0;i<iterations;i++) {     
             
             pop.evolve();    
-            //pop.sortPopulation();
-            pop.calcAvgFitness();
-
-            double best=pop.getGlobalFitness();
-            double avg=pop.getAvgFitness();        
-
             
-             if(i%step==0){
-                bests[k][j]=best;
-                avgs[k][j]=avg;
+            
+            if(i%step==0){
+                pop.calcAvgFitness();
+                bests[k][j]=pop.getGlobalFitness();
+                avgs[k][j]=pop.getAvgFitness();
                 worsts[k][j]=0;                
                 k++;
             }              
@@ -57,6 +53,7 @@ public class PSwarmTest extends Test{
         results[j]=pop.getGlobal();
         
         System.out.println("Particle Swarm EXPERIMENT "+j+" FINISHED");
+        
         
     }
 

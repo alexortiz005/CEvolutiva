@@ -30,7 +30,7 @@ public abstract class Test implements Runnable{
     public Test(int iterations, int experiments,String outputFileName) {
         this.iterations = iterations;
         this.experiments = experiments;
-        this.step=iterations/1000;
+        this.step=iterations/100;
         this.steps=iterations/step; 
         this.bests= new double[steps][experiments];
         this.avgs= new double[steps][experiments];
